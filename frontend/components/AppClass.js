@@ -3,6 +3,7 @@
 // ❗ OPTIONAL, not required to pass the sprint
 import React from 'react'
 
+
 // Suggested initial states
 const initialMessage = ''
 const initialEmail = ''
