@@ -73,7 +73,7 @@ export default function AppFunctional(props) {
         setMoveMessage("");
         index--;
         setCurrentIndex(index);
-        setStepCount(stepCount+1)
+        setStepCount(stepCount + 1);
       }
     }
     if (id === "right") {
@@ -83,27 +83,27 @@ export default function AppFunctional(props) {
         setMoveMessage("");
         index++;
         setCurrentIndex(index);
-        setStepCount(stepCount+1)
+        setStepCount(stepCount + 1);
       }
     }
     if (id === "up") {
-      if (index <3 ) {
+      if (index < 3) {
         setMoveMessage("You can't go up");
       } else {
         setMoveMessage("");
-        index = index-3;
+        index = index - 3;
         setCurrentIndex(index);
-        setStepCount(stepCount+1)
+        setStepCount(stepCount + 1);
       }
     }
     if (id === "down") {
-      if (index >5 ) {
+      if (index > 5) {
         setMoveMessage("You can't go down");
       } else {
         setMoveMessage("");
-        index = index+3;
+        index = index + 3;
         setCurrentIndex(index);
-        setStepCount(stepCount+1)
+        setStepCount(stepCount + 1);
       }
     }
 
@@ -112,41 +112,43 @@ export default function AppFunctional(props) {
 
   function onChange(evt) {
     // You will need this to update the value of the input.
-    setEmail(evt.target.value)
+    setEmail(evt.target.value);
   }
 
   function handleSubmit(evt) {
     // Use a POST request to send a payload to the server.
     // { "x": 1, "y": 2, "steps": 3, "email": "lady@gaga.com" }
-    evt.preventDefault()
+    evt.preventDefault();
     const payload = {
       x: getX(currentIndex),
       y: getY(currentIndex),
       steps: stepCount,
-      email: userEmail
-    }
+      email: userEmail,
+    };
     fetch("http://localhost:9000/api/result", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     })
-      .then(res=>{
-        return res.json()
+      .then((res) => {
+        return res.json();
       })
-      .then(data=> {
-        setMoveMessage(data.message)
-        setEmail("")
+      .then((data) => {
+        setMoveMessage(data.message);
+        setEmail("");
       })
-      .catch(err => {
-        console.error("error", err)
-      })
+      .catch((err) => {
+        console.error("error", err);
+      });
   }
 
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
         <h3 id="coordinates">{coordinateMessage}</h3>
-        <h3 id="steps">You moved {stepCount} time{stepCount>1?"s":""}</h3>
+        <h3 id="steps">
+          You moved {stepCount} time{stepCount === 1 ? "" : "s"}
+        </h3>
       </div>
       <div id="grid">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((idx) => (
@@ -178,8 +180,14 @@ export default function AppFunctional(props) {
           reset
         </button>
       </div>
-      <form onSubmit = {handleSubmit}>
-        <input id="email" type="email" placeholder="type email" onChange={onChange} value={userEmail}></input>
+      <form onSubmit={handleSubmit}>
+        <input
+          id="email"
+          type="email"
+          placeholder="type email"
+          onChange={onChange}
+          value={userEmail}
+        ></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
