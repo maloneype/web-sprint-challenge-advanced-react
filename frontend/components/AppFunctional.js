@@ -18,7 +18,7 @@ export default function AppFunctional(props) {
 
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
-  function getX(index) {
+  function getY(index) {
     // It it not necessary to have a state to track the coordinates.
     // It's enough to know what index the "B" is at, to be able to calculate them.
     if (index >= 0 && index < 3) {
@@ -29,7 +29,7 @@ export default function AppFunctional(props) {
     return 3;
   }
 
-  function getY(index) {
+  function getX(index) {
     // It it not necessary to have a state to track the coordinates.
     // It's enough to know what index the "B" is at, to be able to calculate them.
     if (index === 0 || index === 3 || index === 6) {
